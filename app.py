@@ -1,7 +1,9 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask import render_template
 from nutritionix import Nutritionix
+import requests
+import json
 
 app = Flask(__name__)
 
@@ -18,6 +20,11 @@ def results():
 def hello():
 	#print nix.search('pizza').json()
 	return render_template('main.html')
+
+@app.route("/getResults",methods=['POST','GET'])
+def getResults():
+	dummyinfo=request.json['dummyinfo']
+	return jsonify(result=dummyinfo)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

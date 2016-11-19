@@ -13,3 +13,20 @@ function dropDownInteractivity() {
 }
 
 dropDownInteractivity();
+
+/*------------------Populate dropdowns---------------------*/
+var data = {"dummyinfo":42}
+populateResults(data);
+function populateResults(data) {
+    $.ajax({
+        type: "POST",
+        url: "/getResults",
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        data: JSON.stringify(data),
+        success: function(response) {
+        	console.log(response);
+
+        }
+    });
+}

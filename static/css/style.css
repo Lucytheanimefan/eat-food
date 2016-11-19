@@ -1,7 +1,6 @@
 button.accordion {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -15,7 +14,7 @@ button.accordion {
 
 button.accordion.active,
 button.accordion:hover {
-   background-color: rgba(238, 238, 238, 0.4);
+    background-color: rgba(238, 238, 238, 0.4);
     color: #444;
 }
 
@@ -43,4 +42,40 @@ div.panel {
 div.panel.show {
     opacity: 1;
     max-height: 500px;
+}
+
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-15 {
+    width: 19%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-15 {
+        width: 19%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 19%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 19%;
+        float: left;
+    }
 }
