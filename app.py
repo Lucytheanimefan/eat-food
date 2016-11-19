@@ -4,6 +4,8 @@ from flask import render_template
 from nutritionix import Nutritionix
 import requests
 import json
+import nutrientCalculator
+from nutrientCalculator import get_info
 
 app = Flask(__name__)
 
@@ -20,10 +22,13 @@ def hello():
 	#print nix.search('pizza').json()
 	return render_template('main.html')
 
+#get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
 @app.route("/getResults",methods=['POST','GET'])
 def getResults():
-	dummyinfo=request.json['dummyinfo']
-	return jsonify(result=dummyinfo)
+	print "---------------------in getResults"
+	print request.json
+	json = get_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
+	return jsonify(result=json)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

@@ -1,5 +1,3 @@
-from nutritionix import Nutritionix
-
 def convert_height(feet, inches):
     """
     Converts height given in feet and inches into height in centimeters
