@@ -1,16 +1,43 @@
 {% extends "layout.html" %} {% block body %}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="weight">Weight:</label>
-            <input type="text" class="form-control" id="usr">
+            <input type="text" placeholder="Weight" class="form-control" id="weight">
         </div>
-    </div>
-    <div class="col-md-6">
         <div class="form-group">
             <label for="height">Height:</label>
-            <input type="password" class="form-control" id="pwd">
+            <input placeholder="feet" type="height_ft" class="form-control" id="height_ft">
+            <input placeholder="inches" type="height_in" class="form-control" id="height_in">
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="age" placeholder="Age" class="form-control" id="age">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <input type="gender" placeholder="Gender" class="form-control" id="gender">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Activity
+                <span class="caret"></span>
+            </button>
+            <ul id = "activitylist" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">bmr</a></li>
+                <li><a href="#">mild</a></li>
+                <li><a href="#">moderate</a></li>
+                <li><a href="#">heavy</a></li>
+                <li><a href="#">extreme</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <button id="go">Go</button>
 </div>
 {% endblock %}
