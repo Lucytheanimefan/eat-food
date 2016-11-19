@@ -27,7 +27,6 @@ def get_activity_factor(activity):
     :return: activity factor
     """
     activity_level_map = {"bmr": 1, "sedentary": 1.2, "mild": 1.375, "moderate": 1.55, "heavy": 1.7, "extreme": 1.9}
-    activity = (activity.split(' ')[0]).lower()
     activity_factor = activity_level_map[activity]
     return activity_factor
 
@@ -42,7 +41,6 @@ def calculate_calories(gender, age, height, weight, activity_factor):
     :return: the number of calories to consume
     """
     BMR = 0
-    gender = gender.lower()
     #Mifflin - St Jeor equation
     if (gender == "male"):
         BMR = 10*weight + 6.25*height - 5*age + 5
@@ -63,3 +61,16 @@ def calculate_daily_values(calories):
     for nutrient in daily_value_2000:
         daily_values[nutrient] = daily_value_2000[nutrient]*calories/2000
     return daily_values
+
+def get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level):
+    gender = gender_string.lower()
+    age = age_string
+    height = convert_height(height_feet, height_inches)
+    weight = convert_weight(weight_string)
+    activity_level = (activity_level.split(' ')[0]).lower()
+    activity_factor = get_activity_factor(activity_level)
+    calories = calculate_calories(gender, age, height, weight, activity_factor)
+
+    info = calculate_daily_values(calories)
+    info["calories"] = calories
+    return info
