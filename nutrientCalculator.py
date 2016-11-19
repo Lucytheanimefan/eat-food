@@ -64,9 +64,9 @@ def calculate_daily_values(calories):
 
 def get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level):
     gender = gender_string.lower()
-    age = age_string
-    height = convert_height(height_feet, height_inches)
-    weight = convert_weight(weight_string)
+    age = int(age_string)
+    height = convert_height(int(height_feet), int(height_inches))
+    weight = convert_weight(int(weight_string))
     activity_level = (activity_level.split(' ')[0]).lower()
     activity_factor = get_activity_factor(activity_level)
     calories = calculate_calories(gender, age, height, weight, activity_factor)
