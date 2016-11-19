@@ -30,3 +30,20 @@ function populateResults(data) {
         }
     });
 }
+/*----------------get user input-------------------------*/
+function getUserInput(){
+	var data = {}
+	data["weight"]=$("#weight").val();
+	data["height"]=$("#height").val();
+	data["age"] = $("#age").val();
+	data["gender"] = $("#gender").val();
+	return data;
+}
+
+function sendInputToBackend(data){
+	
+}
+
+$("#go").click(function(){
+	var data = getUserInput();
+})
