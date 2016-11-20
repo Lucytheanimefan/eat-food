@@ -78,6 +78,7 @@ def journal():
 def write():
 	global username
 	emotions = request.json['emotions']
+	print emotions
 	notes = request.json['notes']
 	food = request.json['food']
 	write_emotions(username, food, emotions, notes)
