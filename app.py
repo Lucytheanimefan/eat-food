@@ -27,7 +27,7 @@ def hello():
 def getResults():
 	print "---------------------in getResults"
 	print request.json
-	json = get_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
+	info = get_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
 	return jsonify(result=json)
 
 if __name__ == "__main__":
