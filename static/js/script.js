@@ -190,6 +190,8 @@ function enterFeelings() {
 }
 
 function getCalendar() {
+    calendar(11);
+    
     $.ajax({
         type: 'POST',
         url: '/getCalendar',
@@ -197,9 +199,10 @@ function getCalendar() {
         dataType: 'json',
         success: function(response) {
             var data = response["result"];
-            makeCalendar(data);
+            console.log(data);
         }
     });
+    
 }
 
 function makeCalendar(data) {
@@ -277,5 +280,6 @@ function calendar(month) {
     calendarTable += "<tr>";
     calendarTable += padding;
     calendarTable += "</tr></table>";
-    document.getElementById("calendar").innerHTML += calendarTable;
+    console.log(calendarTable);
+    $("#calendar").html(calendarTable);
 }
