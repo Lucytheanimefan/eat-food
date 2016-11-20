@@ -9,6 +9,7 @@ import requests
 import json
 import nutrientCalculator
 from nutrientCalculator import get_info
+from mealPlan import getMealPlan
 
 app = Flask(__name__)
 
@@ -23,6 +24,11 @@ url = 'https://api.nutritionix.com/v1_1/search?'
 def results():
 	#print nix.search('pizza').json()
 	return render_template('results.html')
+
+@app.route("/login")
+def login():
+	#print nix.search('pizza').json()
+	return render_template('login.html')
 
 @app.route("/home")
 @app.route("/")
@@ -101,6 +107,10 @@ if __name__ == '__main__':
 def getResults():
 	print "---------------------in getResults"
 	print request.json
-	json = get_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
+	info = get_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
 	return jsonify(result=json)
 
+if __name__ == "__main__":
+	print getMealPlan(["eggs","fish","gluten"],100, 5, 5, "vegetable")
+	port = int(os.environ.get("PORT", 5000))
+	app.run(host='0.0.0.0', port=port)
