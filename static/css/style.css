@@ -13,6 +13,21 @@ body {
     top: 10% !important;
 }
 
+form {
+    text-align: center;
+}
+#login{
+    margin-left: 25% !important;
+    text-align: center;
+    width: 50%;
+    border-style: solid;
+    border-color: #f49ac1 !important;
+    margin-left: -50px;
+    margin-right: -50px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
 button.accordion {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
