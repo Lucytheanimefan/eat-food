@@ -48,6 +48,9 @@ def hello():
 def search():
 	return render_template('main.html')
 
+@app.route("/journal")
+def journal():
+	return render_template('journal.html')
 
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
 @app.route("/getResults",methods=['POST','GET'])
@@ -60,12 +63,12 @@ def getResults():
 if __name__ == "__main__":
 	document = db.users.find({"username": "amanocha"})[0]
 	restrictions = document["restrictions"]
-	calories_min = 100
-	max_total_fat = 100
-	max_cholesterol = 100
-	max_saturated_fat = 100
-	max_sodium = 100
-	max_sugar = 100
+	calories_min = document["calories"]
+	max_total_fat = document["total_fat"]
+	max_cholesterol = document["cholesterol"]
+	max_saturated_fat = document["saturated_fat"]
+	max_sodium = document["sodium"]
+	max_sugar = document["sugar"]
 	getMealPlan(restrictions,calories_min, 50, 5, "vegetable",max_total_fat,
 	max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
 
