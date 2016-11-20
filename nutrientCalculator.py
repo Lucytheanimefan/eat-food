@@ -112,7 +112,7 @@ def write_info(username, gender_string, age_string, height_feet, height_inches, 
             "height_ft": height_feet,
             "height_in": height_inches,
             "weight": weight_string,
-            "activity_level": activity_level,
+            "activity": activity_level,
             "restrictions": restrictions}}
     )
 
@@ -126,7 +126,7 @@ def get_info(username):
     entries["height_ft"] = doc["height_ft"]
     entries["height_in"] = doc["height_in"]
     entries["weight"] = doc["weight"]
-    entries["activity_level"] = doc["activity_level"]
+    entries["activity"] = doc["activity"]
     entries["restrictions"] = doc["restrictions"]
     return entries
 

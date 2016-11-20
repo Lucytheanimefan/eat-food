@@ -28,7 +28,7 @@
                     Activity
                     <span class="caret"></span>
                 </button>
-                <ul id="activitylist" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <ul id="activitylist" value= {{activity}} class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="#">bmr</a></li>
                     <li><a href="#">mild</a></li>
                     <li><a href="#">moderate</a></li>
@@ -38,26 +38,31 @@
             </div>
         </div>
     </div>
-    <div class="row search">
+    <div class="row search" id = "restrictions" value = {{restrictions}}>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "gluten" value="gluten">Gluten free</label>
+            <input type="checkbox" class="restriction" id="gluten" value="gluten">Gluten free</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "tree_nutes" value="tree_nuts">Tree nut allergy</label>
+            <input type="checkbox" class="restriction" id="tree_nutes" value="tree_nuts">Tree nut allergy</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "eggs" value="eggs">Egg free</label>
+            <input type="checkbox" class="restriction" id="eggs" value="eggs">Egg free</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "milk" value="milk">Dairy free</label>
+            <input type="checkbox" class="restriction" id="milk" value="milk">Dairy free</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "peanuts" value="peanuts">Peanut free</label>
+            <input type="checkbox" class="restriction" id="peanuts" value="peanuts">Peanut free</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "shellfish" value="shellfish">Shellfish free</label>
+            <input type="checkbox" class="restriction" id="shellfish" value="shellfish">Shellfish free</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "soybeans" value="soybeans">Soybean free</label>
+            <input type="checkbox" class="restriction" id="soybeans" value="soybeans">Soybean free</label>
         <label class="checkbox-inline">
-            <input type="checkbox" class="restriction" id = "wheat" value="wheat">Wheat free</label>
+            <input type="checkbox" class="restriction" id="wheat" value="wheat">Wheat free</label>
     </div>
     <div class="row search">
         <button class="button" id="go">Go</button>
     </div>
+    <script type="text/javascript">
+    
+
+    updateRestrictionsActivitiesInEdit();
+    </script>
 </div>
 {% endblock %}
