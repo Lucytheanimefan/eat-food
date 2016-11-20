@@ -63,14 +63,18 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
     tel['calcium'] = item_i['nf_calcium_dv']
     tel['iron'] = item_i['nf_iron_dv']
     allFood.append(tel)
-  
+
+  # this should a list of 8 mean plans, and each is represented as a dictionary  
   allMealPlans = []
+  
+  #while loop each time getting a meal plan, so loop 8 times
   i = 0
   while (i < 8):
     oneMealPlan = {}
     oneMealPlan['name'] = []
 
-
+    #each mean plan dictionary of meal plan will have those values calculated
+    # names are all the food in this meal plan
     allIngredients = ['calories','vitamin_c', 'total_fat','carbs','saturated_fat','sodium', 'sugar','fiber','cholesterol','calcium','iron']
 
     for x in allIngredients:
@@ -81,6 +85,7 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
         print "check"
         oneMealPlan['name'].append(allFood[item]['name'])
         for j in allIngredients:
+          #this if check to see if some variable is none does not work, need Debug
           if isinstance(allFood[item][j], basestring):
           #if allFood[item][j] == 'None' :
             print "isNone"
