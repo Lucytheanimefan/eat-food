@@ -1,4 +1,3 @@
-import app
 import server
 
 db = server.get_db()
