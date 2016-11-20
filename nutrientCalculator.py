@@ -80,7 +80,19 @@ def calculate_daily_values(username, calories):
         )
     return daily_values
 
-def get_info(username, gender_string, age_string, height_feet, height_inches, weight_string, activity_level, restrictions):
+def write_info(username, gender_string, age_string, height_feet, height_inches, weight_string, activity_level, restrictions):
+    """
+    Writes the information about the individual to the database
+    :param username: username of inidividual
+    :param gender_string: gender of individual
+    :param age_string: age of individual
+    :param height_feet: feet component of height of individual
+    :param height_inches: inches component of height of individual
+    :param weight_string: weight of individual in pounds
+    :param activity_level: activity level of individual
+    :param restrictions: dietary restrictions of individual
+    :return: none
+    """
     gender = gender_string.lower()
     age = int(age_string)
     height = convert_height(int(height_feet), int(height_inches))
@@ -95,5 +107,5 @@ def get_info(username, gender_string, age_string, height_feet, height_inches, we
         {"$set": {"restrictions": restrictions}}
     )
 
-#print(login.create_account("amanocha", "password"))
-#get_info("amanocha", "female", 19, 5, 2, 120, "moderate")
+print(login.create_account("amanocha", "password"))
+write_info("amanocha", "female", 19, 5, 2, 120, "moderate", [])

@@ -1,25 +1,25 @@
 import os
-import requests
 import json
+import requests
+import server
 from requests.auth import HTTPBasicAuth
 from flask import Flask, request, jsonify
 from flask import render_template
 from nutritionix import Nutritionix
-import requests
-import json
-import nutrientCalculator
-from nutrientCalculator import get_info
+from nutrientCalculator import write_info
 from mealPlan import getMealPlan
 from login import create_account
 
 app = Flask(__name__)
-
-
+username = ""
+db =  server.get_db()
 
 nix = Nutritionix(app_id='7f770e5d', api_key='dae4065c600b6b161789a27471167ccd') #make these env variables later
 url = 'https://api.nutritionix.com/v1_1/search?'
 
-
+def set_username(new_username):
+	global username
+	username = new_username
 
 @app.route("/results")
 def results():
@@ -43,10 +43,13 @@ def search():
 def getResults():
 	print "---------------------in getResults"
 	print request.json
-	info = get_info(request.json['username'],request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'], request.json['restrictions'])
+	info = write_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
 	return jsonify(result=json)
 
 if __name__ == "__main__":
-	print getMealPlan(["eggs","fish","gluten"],100, 5, 5, "vegetable")
+	document = db.users.find({"username": "amanocha"})[0]
+	restrictions = document["restrictions"]
+	calories = document["calories"]
+	print getMealPlan(restrictions, calories, 5, 5, "vegetable")
 	port = int(os.environ.get("PORT", 5000))
 	app.run(host='0.0.0.0', port=port)
