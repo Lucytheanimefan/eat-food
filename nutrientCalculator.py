@@ -107,5 +107,8 @@ def write_info(username, gender_string, age_string, height_feet, height_inches, 
         {"$set": {"restrictions": restrictions}}
     )
 
+
+    return {"calories":calories, "daily_values":daily_values}
+
 print(login.create_account("amanocha", "password"))
 write_info("amanocha", "female", 19, 5, 2, 120, "moderate", [])

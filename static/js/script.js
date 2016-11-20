@@ -22,31 +22,63 @@ function populateResults(data) {
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        processData: false,
         success: function(response) {
-            console.log('in ajax');
-            console.log(response);
+            var data = response["result"];
+            localStorage.setItem("mealPlan", data);
+            $("#bars").remove();
+            $("#main").append('<div id = "bars"><div class="col-md-3">' +
+                '<button class="accordion"></button>' +
+                '<div class="panel" id="panel1"><p></p></div><button class="accordion"></button><div class="panel" id="panel2">' +
+                '<p></p></div></div><div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel3">' +
+                '<p></p></div><button class="accordion"></button><div class="panel" id="panel4"><p></p></div></div>' +
+                '<div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel5"><p></p></div>' +
+                '<button class="accordion"></button><div class="panel" id="panel6"><p></p></div></div>' +
+                '<div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel7"><p></p></div>' +
+                '<button class="accordion"></button><div class="panel" id="panel8"><p></p></div></div></div>')
+            for (var i = 0; i < 8; i++) {
+                console.log(data[i]);
+                for (var j = 0; j < data[i]["meal_plan"].length; j++) {
+                    $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "<br>");
+                }
+            }
+            dropDownInteractivity();
 
         }
     });
+}
+
+function populateDropdown() {
+    var data = localStorage.mealPlan;
+    for (var i = 0; i < 8; i++) {
+        console.log(data[i]);
+        for (var j = 0; j < data[i]["meal_plan"].length; j++) {
+            $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "\n");
+        }
+    }
 }
 /*----------------get user input-------------------------*/
 var data = {}
 data["restrictions"] = [];
 data["feelings"] = [];
 
+var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs", "tree_nut"]
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
     data['activity'] = $(this).text();
 });
 
 function getUserInput() {
-    data['username'] = username;
+    //data['username'] = username;
     data['weight'] = $('#weight').val();
     data['height_ft'] = $('#height_ft').val();
     data['height_in'] = $('#height_in').val();
     data['age'] = $('#age').val();
     data['gender'] = $('#gender').val();
+    for (var i = 0; i < restriction_ids.length; i++) {
+        if ($("#" + restriction_ids[i]).is(':checked')) {
+            data["restrictions"].push(restriction_ids[i]);
+        }
+    }
     return data;
 }
 
@@ -56,13 +88,6 @@ $('#go').click(function() {
     populateResults(data);
 });
 
-$('input:checkbox.restriction').each(function() {
-    data["restrictions"].push((this.checked ? $(this).val() : ""));
-});
-
-var d = document
-var feelingsButton = d.getElementById('submit')
-var feelings = d.getElementById('feelingsForm')
 
 feelingsButton.onclick = function () {
     var feelingsArray = feelingsToArray(feelings.children)
@@ -86,8 +111,8 @@ $('label.myClass select').each(function(){
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
-	console.log("Username: "+username);
-	console.log("password: "+password);
+    console.log("Username: " + username);
+    console.log("password: " + password);
     $.ajax({
         type: 'POST',
         url: '/createaccount',
@@ -120,8 +145,33 @@ function login(username, password) {
 
 }
 
-function enterFeelings(feelings) {
-    console.log(feelings)
-    data["feelings"] = feelings;
+var feelings_ids = ["happy", "content", "neutral", "excited", "angry", "frustrated", "sick", "sad", "disappointed"];
+
+feelings_ids.map(function(id) {
+    $("#" + id).click(function() {
+        console.log($("#" + id));
+        var val = $("#" + id).attr("value");
+        console.log(val);
+        $("#" + id).attr("value", -1 * parseInt(val));
+
+    });
+})
+
+
+
+
+function feelingsToArray() {
+    var data = [];
+    for (var i = 0; i < feelings_ids.length; i++) {
+        if (parseInt($("#" + feelings_ids[i]).attr("value")) > 0) {
+            data.push(feelings_ids[i]);
+        }
+    }
+    return data;
+}
+
+function enterFeelings() {
+    var feelingsArray = feelingsToArray();
+    console.log(feelingsArray);
 
 }

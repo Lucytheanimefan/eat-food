@@ -5,14 +5,16 @@ nix = Nutritionix(app_id="7f770e5d", api_key="dae4065c600b6b161789a27471167ccd")
 
 
 def canAdd(item, oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
-  print "Saturated fat-----------"
-  print oneMealPlan['saturated_fat']
-  print item['saturated_fat']
-  print "----------------------"
+  #print "Saturated fat-----------"
+  #print oneMealPlan['saturated_fat']
+  #print item['saturated_fat']
+  #print "----------------------"
   if item['saturated_fat'] is None:
     item['saturated_fat'] = 0
   if item['sugar'] is None:
     item['sugar'] = 0
+  if item['total_fat'] is None:
+    item['total_fat']=0
   return ((oneMealPlan['total_fat'] + item['total_fat'] <= max_total_fat) and
   (oneMealPlan['saturated_fat'] + item['saturated_fat'] <= max_saturated_fat) and
   (oneMealPlan['cholesterol'] + item['cholesterol'] <= max_cholesterol) and
@@ -34,12 +36,24 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
    'nf_dietary_fiber','nf_protein','nf_calcium_dv', 'nf_iron_dv']
   response = nix.search().nxql(
     filters={
-    "nf_calories": {
-    "lte": calories_min * 1.5,
+    "nf_sodium": {
+    "lte": max_sodium,
+    },
+    "nf_sugars": {
+    "lte": max_sugar,
+    },
+    "nf_total_fat": {
+    "lte": max_total_fat,
+    },
+    "nf_saturated_fat": {
+    "lte": max_saturated_fat,
+    },
+    "nf_cholesterol": {
+    "lte": max_cholesterol,
+    },
     "not":{
      "item_type":1, #not from restaurant
      "nf_serving_weight_grams":None
-    }
     }
   },
   sort = {
@@ -52,10 +66,13 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
   ).json()
 
   allFood = []  
-  print response
+  #print response
+  print "length"
+  print len(response['hits'])
   for i in response['hits']:
     tel = {}  
     item_i = i['fields']
+    tel['name']=item_i['item_name']
     tel['calories'] = item_i['nf_calories']
     tel['name'] = item_i['item_name']
     tel['vitamin_a'] = item_i['nf_vitamin_a_dv']
@@ -72,14 +89,17 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
     tel['iron'] = item_i['nf_iron_dv']
     allFood.append(tel)
 
-  # this should a list of 8 mean plans, and each is represented as a dictionary  
+  # this should a list of 8 mea; plans, and each is represented as a dictionary  
+  
+  allFood = allFood + allFood + allFood + allFood
+
   allMealPlans = []
   
   #while loop each time getting a meal plan, so loop 8 times
   i = 0
   while (i < 8):
     oneMealPlan = {}
-    oneMealPlan['name'] = []
+    oneMealPlan['meal_plan'] = []
 
     #each mean plan dictionary of meal plan will have those values calculated
     # names are all the food in this meal plan
@@ -88,30 +108,33 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
     for x in allIngredients:
       oneMealPlan[x] = 0
 
-    for item in range(i, len(allFood)):
+    oneMealPlan['counttest']=i
+    #oneMealPlan['item_name']=allFood[i]['name']
+    #print allFood[i]['name']
+
+    for item in range(i * 7, len(allFood)):
       if (canAdd(allFood[item], oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar)):
-        print "check"
-        oneMealPlan['name'].append(allFood[item]['name'])
+        oneMealPlan['meal_plan'].append(allFood[item]['name'])
+        #print "i value"
+        #print i * 5
         for j in allIngredients:
           #this if check to see if some variable is none does not work, need Debug
           if isinstance(allFood[item][j], basestring):
-          #if allFood[item][j] == 'None' :
-            print "isNone"
             y = 0
           else:
             y = allFood[item][j]
-          print "the ingredient: " + j
-         # print "y value is " + y
-          print allFood[item][j]
           if oneMealPlan[j] is None:
             oneMealPlan[j]=0
           if y is None:
             y = 0
           oneMealPlan[j] = oneMealPlan[j]+ y
-      allMealPlans.append(oneMealPlan)
+    #print "++++++++++each meal plan+++++++++++++++"
+    #for w in oneMealPlan['meal_plan']:
+    #  print w 
+    allMealPlans.append(oneMealPlan)
     i = i + 1
 
-
+  #print len(allMealPlans)
   return allMealPlans
 
 #value = response["food"]

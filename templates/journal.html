@@ -6,42 +6,43 @@
             <input type="text" placeholder="Food" class="form-control" id="food">
         </div>
         <div class="form-group" id="feelingsForm">
-            <label for="feelings">How do you feel about it?</label><br>
-            <label class="image-checkbox" title="Content" id="content">
-                <img src="/static/img/content.png" class="img-rounded" alt="content" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="content" value="content"/>
+            <label for="feelings">How do you feel about it?</label>
+            <br>
+            <label class="image-checkbox" title="Content">
+                <img src="/static/img/content.png" id="content" value = -1 class="img-rounded" alt="content" width="83" height="75p">
+                
             </label>
-            <label class="image-checkbox" title="Happy" id="happy">
-                <img src="/static/img/happy.png" class="img-rounded" alt="happy" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="happy" value="happy"/>
+            <label class="image-checkbox" title="Happy">
+                <img src="/static/img/happy.png" id="happy" value = -1 class="img-rounded" alt="happy" width="83" height="75p">
+               
             </label>
-            <label class="image-checkbox" title="Excited" id="excited">
-                <img src="/static/img/excited.png" class="img-rounded" alt="excited" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="excited" value="excited"/>
+            <label class="image-checkbox" title="Excited">
+                <img src="/static/img/excited.png" id="excited" value = -1 class="img-rounded" alt="excited" width="83" height="75p">
+               
             </label>
-            <label class="image-checkbox" title="Neutral" id="neutral">
-                <img src="/static/img/neutral.png" class="img-rounded" alt="neutral" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="neutral" value="neutral"/>
+            <label class="image-checkbox" title="Neutral">
+                <img src="/static/img/neutral.png" id="neutral" value = -1 class="img-rounded" alt="neutral" width="83" height="75p">
+                
             </label>
-            <label class="image-checkbox" title="Angry" id="angry">
-                <img src="/static/img/angry.png" class="img-rounded" alt="angry" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="angry" value="angry"/>
+            <label class="image-checkbox" title="Angry">
+                <img src="/static/img/angry.png" id="angry" value = -1 class="img-rounded" alt="angry" width="83" height="75p">
+                
             </label>
-            <label class="image-checkbox" title="Frustrated" id="frustrated">
-                <img src="/static/img/frustrated.png" class="img-rounded" alt="frustrated" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="frustrated" value="frustrated"/>
+            <label class="image-checkbox" title="Frustrated">
+                <img src="/static/img/frustrated.png" id="frustrated" value = -1 class="img-rounded" alt="frustrated" width="83" height="75p">
+               
             </label>
-            <label class="image-checkbox" title="Sick" id="sick">
-                <img src="/static/img/sick.png" class="img-rounded" alt="sick" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="sick" value="sick"/>
+            <label class="image-checkbox" title="Sick">
+                <img src="/static/img/sick.png" id="sick" value = -1 class="img-rounded" alt="sick" width="83" height="75p">
+                
             </label>
-            <label class="image-checkbox" title="Sad" id="sad">
-                <img src="/static/img/sad.png" class="img-rounded" alt="sad" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="sad" value="sad"/>
+            <label class="image-checkbox" title="Sad">
+                <img src="/static/img/sad.png" id="sad" value = -1 class="img-rounded" alt="sad" width="83" height="75p">
+                
             </label>
-            <label class="image-checkbox" title="Disappointed" id="disappointed">
-                <img src="/static/img/disappointed.png" class="img-rounded" alt="disappointed" width="83" height="75p">
-                <input type="checkbox" class="feeling" name="disappointed" value="disappointed"/>
+            <label class="image-checkbox" title="Disappointed">
+                <img src="/static/img/disappointed.png" id="disappointed" value = -1 class="img-rounded" alt="disappointed" width="83" height="75p">
+                
             </label>
         </div>
     </div>
@@ -50,7 +51,7 @@
             <label for="notes">Notes:</label>
             <textarea class="form-control" rows="11" id="notes"></textarea>
         </div>
-        <button type="button" class="btn btn-default" id="submit" onClick="enterFeelings(document.myform.list)">Go</button>
+        <button type="button" class="btn btn-default" id="submit" onclick="enterFeelings()">Go</button>
     </div>
 </div>
 {% endblock %}
