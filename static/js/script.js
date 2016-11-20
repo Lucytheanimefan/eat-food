@@ -26,6 +26,9 @@ function populateResults(data) {
             var data = response["result"];
             localStorage.setItem("mealPlan", data);
             $("#bars").remove();
+
+
+
             $("#main").append('<div id = "bars"><div class="col-md-3">' +
                 '<button class="accordion"></button>' +
                 '<div class="panel" id="panel1"><p></p></div><button class="accordion"></button><div class="panel" id="panel2">' +
@@ -41,11 +44,20 @@ function populateResults(data) {
                     $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "<br>");
                 }
             }
+
             dropDownInteractivity();
+            $('.accordion').each(function(index) {
+                var i = (index % 4) + 1;
+                console.log(this);
+                console.log(i)
+                this.css("background-image", "url('../img/drop_down_" + index + ".png')")
+            });
 
         }
     });
 }
+
+
 
 function populateDropdown() {
     var data = localStorage.mealPlan;
@@ -89,23 +101,7 @@ $('#go').click(function() {
 });
 
 
-feelingsButton.onclick = function () {
-    var feelingsArray = feelingsToArray(feelings.children)
-    //console.log(feelings.children[0]);
-}
-
-function feelingsToArray (inputs) {
-    var array = [];
-    for (var i = 0; i < inputs.length; i++) {
-        var label = $(inputs[i].id);
-        console.log(inputs[i].children.children)
-        if (inputs[i].checked)
-            arraya.push(inputs[i].value);
-    }
-    return array;
-}
-
-$('label.myClass select').each(function(){
+$('label.myClass select').each(function() {
     var inputVal = $(this).val();
 });
 
