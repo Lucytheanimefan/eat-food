@@ -56,14 +56,18 @@ def search():
 def edit_info():
 	return get_info(username)
 
-@app.route("/edit") 
+@app.route("/calendar")
+def calendar():
+	return render_template('calendar.html')
+
+@app.route("/edit")
 def edit():
 	data = get_info(username)
 	return render_template('edit.html', gender = data["gender"], age = data["age"], feet = data["height_ft"], inches = data ["height_in"], weight = data["weight"], restrictions = data["restrictions"], activity = data["activity"])
 
 @app.route("/get_meal_plan_info",methods=['POST','GET'])
-def getMealPlan():
-	return data = get_info(username)
+def get_meal_plan():
+	return get_info(username)
 
 
 @app.route("/journal")
@@ -81,7 +85,7 @@ def write():
 @app.route("/getCalendar",methods=['POST','GET'])
 def getCalendar():
 	global username
-	return get_calendar(username)
+	return jsonify(result = get_calendar(username))
 	
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
 #restrictions, calories_min, limit_number, offset_value, food_type, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):

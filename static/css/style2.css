@@ -4,6 +4,12 @@ header{
     text-align: center;
 }
 
+
+#calendar {
+    margin-left: 10%;
+    text-align: center !important;
+}
+
 button.accordion {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;

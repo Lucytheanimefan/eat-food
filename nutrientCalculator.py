@@ -99,11 +99,12 @@ def write_info(username, gender_string, age_string, height_feet, height_inches, 
     age = int(age_string)
     height = convert_height(int(height_feet), int(height_inches))
     weight = convert_weight(int(weight_string))
-    activity_level = (activity_level.split(' ')[0]).lower()
-    activity_factor = get_activity_factor(activity_level)
+    activity_level2 = (activity_level.split(' ')[0]).lower()
+    activity_factor = get_activity_factor(activity_level2)
     calories = calculate_calories(username, gender, age, height, weight, activity_factor)
     daily_values = calculate_daily_values(username, calories)
 
+    print activity_level
     db.users.update(
         {"username": username},
         {"$set": {
@@ -121,6 +122,7 @@ def write_info(username, gender_string, age_string, height_feet, height_inches, 
 def get_info(username):
     doc = db.users.find({"username": username})[0]
     entries = {}
+    print doc["activity"]
     entries["gender"] = doc["gender"]
     entries["age"] = doc["age"]
     entries["height_ft"] = doc["height_ft"]
