@@ -136,6 +136,48 @@ function login(username, password) {
 
 }
 
+function edit(username, gender, age, height_feet, height_inches, weight, activity_level, restrictions) {
+    $.ajax({
+        type: 'POST',
+        url: '/edit',
+        data: JSON.stringify({ "username": username, "gender": gender, "age": age, "height_ft": height_feet,
+        "height_in": height_inches, "weight": weight, "activity_level": activity_level, "restrictions": restrictions}),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+            console.log('in ajax edit user');
+            console.log(response);
+            alert(response);
+
+        }
+    });
+
+}
+
+function get() {
+    $.ajax({
+        type: 'GET',
+        url: '/get_info',
+        dataType: 'json',
+        success: function(response) {
+            console.log('in ajax edit user');
+            console.log(response);
+            var jsonObj = $.parseJSON(response);
+            var html = '<table border="1">';
+            $.each(jsonObj, function(key, value){
+                html += '<tr>';
+                html += '<td>' + key + '</td>';
+                html += '<td>' + value + '</td>';
+                html += '</tr>';
+            });
+            html += '</table>';
+
+            $('div').html(html);
+
+        }
+    });
+}
+
 var feelings_ids = ["happy", "content", "neutral", "excited", "angry", "frustrated", "sick", "sad", "disappointed"];
 
 feelings_ids.map(function(id) {

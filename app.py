@@ -6,7 +6,7 @@ from requests.auth import HTTPBasicAuth
 from flask import Flask, request, jsonify,redirect, url_for, send_from_directory
 from flask import render_template
 from nutritionix import Nutritionix
-from nutrientCalculator import write_info
+from nutrientCalculator import *
 from mealPlan import getMealPlan
 from login import *
 
@@ -50,6 +50,16 @@ def hello():
 @app.route("/search")
 def search():
 	return render_template('main.html')
+
+@app.route("/get_info",methods=['POST','GET'])
+def edit_info():
+	return get_info(username)
+
+@app.route("/edit")
+def edit():
+	data = get_info(username)
+	print(data)
+	return render_template('edit.html', gender = data["gender"], age = data["age"], feet = data["height_ft"], inches = data ["height_in"], weight = data["weight"])
 
 @app.route("/journal")
 def journal():
