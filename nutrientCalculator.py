@@ -96,4 +96,4 @@ def get_info(username, gender_string, age_string, height_feet, height_inches, we
     )
 
 print(login.create_account("amanocha", "password"))
-get_info("amanocha", "female", 19, 5, 2, 120, "moderate")
+get_info("amanocha", "female", 19, 5, 2, 120, "moderate", [])
