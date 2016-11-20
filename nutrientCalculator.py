@@ -55,7 +55,9 @@ def calculate_calories(username, gender, age, height, weight, activity_factor):
 
     db.users.update(
         {"username":username},
-        {"$set":{"calories":calories}}
+        {"$set":{
+            "calories":calories
+        }}
     )
 
     return calories
@@ -104,11 +106,29 @@ def write_info(username, gender_string, age_string, height_feet, height_inches, 
 
     db.users.update(
         {"username": username},
-        {"$set": {"restrictions": restrictions}}
+        {"$set": {
+            "gender": gender,
+            "age": age,
+            "height_ft": height_feet,
+            "height_in": height_inches,
+            "weight": weight_string,
+            "activity_level": activity_level,
+            "restrictions": restrictions}}
     )
 
-
     return {"calories":calories, "daily_values":daily_values}
+
+def get_info(username):
+    doc = db.users.find({"username": username})[0]
+    entries = {}
+    entries["gender"] = doc["gender"]
+    entries["age"] = doc["age"]
+    entries["height_ft"] = doc["height_ft"]
+    entries["height_in"] = doc["height_in"]
+    entries["weight"] = doc["weight"]
+    entries["activity_level"] = doc["activity_level"]
+    entries["restrictions"] = doc["restrictions"]
+    return entries
 
 print(login.create_account("amanocha", "password"))
 write_info("amanocha", "female", 19, 5, 2, 120, "moderate", [])

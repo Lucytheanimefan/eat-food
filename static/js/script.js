@@ -26,6 +26,9 @@ function populateResults(data) {
             var data = response["result"];
             localStorage.setItem("mealPlan", data);
             $("#bars").remove();
+
+
+
             $("#main").append('<div id = "bars"><div class="col-md-3">' +
                 '<button class="accordion"></button>' +
                 '<div class="panel" id="panel1"><p></p></div><button class="accordion"></button><div class="panel" id="panel2">' +
@@ -41,11 +44,20 @@ function populateResults(data) {
                     $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "<br>");
                 }
             }
+
             dropDownInteractivity();
+            $('.accordion').each(function(index) {
+                var i = (index % 4) + 1;
+                console.log(i)
+                this.style["background-image"] = "url('/static/img/drop_down_" + i + ".png')";
+                //this.css("background-image", "url('../img/drop_down_" + index + ".png')")
+            });
 
         }
     });
 }
+
+
 
 function populateDropdown() {
     var data = localStorage.mealPlan;
@@ -87,8 +99,6 @@ $('#go').click(function() {
     console.log(data);
     populateResults(data);
 });
-
-
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
@@ -134,7 +144,6 @@ feelings_ids.map(function(id) {
         var val = $("#" + id).attr("value");
         console.log(val);
         $("#" + id).attr("value", -1 * parseInt(val));
-
     });
 })
 
