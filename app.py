@@ -8,7 +8,7 @@ from flask import render_template
 from nutritionix import Nutritionix
 from nutrientCalculator import write_info
 from mealPlan import getMealPlan
-from login import create_account
+from login import *
 
 app = Flask(__name__)
 username = ""
@@ -24,6 +24,14 @@ def set_username(new_username):
 @app.route("/results")
 def results():
 	return render_template('results.html')
+
+
+@app.route("/login",methods=['POST','GET'])
+def login():
+	open_account(request.json['username'], request.json['password'])
+	set_username(request.json['username'])
+	return "Login Success"
+
 
 @app.route("/createaccount",methods=['POST','GET'])
 def createaccount():
@@ -43,7 +51,7 @@ def search():
 def getResults():
 	print "---------------------in getResults"
 	print request.json
-	info = write_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
+	info = write_info(username, request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'], request.json['restrictions'])
 	return jsonify(result=json)
 
 if __name__ == "__main__":
