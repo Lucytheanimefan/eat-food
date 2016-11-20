@@ -149,9 +149,6 @@ feelings_ids.map(function(id) {
     });
 })
 
-
-
-
 function feelingsToArray() {
     var data = [];
     for (var i = 0; i < feelings_ids.length; i++) {
@@ -164,6 +161,16 @@ function feelingsToArray() {
 
 function enterFeelings() {
     var feelingsArray = feelingsToArray();
-    console.log(feelingsArray);
-
+    var notes = $("#notes").val();
+    var food = $("#food").val();
+    $.ajax({
+        type: 'POST',
+        url: '/writeEmotions',
+        data: JSON.stringify({ "emotions": feelingsArray, "notes": notes, "food": food }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+            console.log("Success")
+        }
+    });
 }
