@@ -72,7 +72,7 @@ function populateDropdown() {
 var data = {}
 data["restrictions"] = [];
 data["feelings"] = [];
-
+data['activity']="moderate";
 var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs", "tree_nut"]
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
