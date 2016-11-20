@@ -40,12 +40,9 @@ def hello():
 def getMeanlPlan(restrictions, calories_max, limit_number, offset_value):
  response = nix.search().nxql(
   filters={
-  "nf_calories": {
-  "lte": calories_max
-  }
-  #,
-  #for res in restrictions:
-  #  res : "None"
+    "nf_calories": {
+    "lte": calories_max
+    },
   },
   offset = offset_value,
   limit = limit_number,
@@ -92,10 +89,11 @@ def getMeanlPlan(restrictions, calories_max, limit_number, offset_value):
 
 
 if __name__ == '__main__':
-    a = ['allergen_contains_fish', 'allergen_contains_gluten'] 
+    a = ['allergen_contains_fish', 'allergen_contains_gluten']   
     getMeanlPlan(a, 50, 5, 0)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+   
 
 
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
