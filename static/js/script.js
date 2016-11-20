@@ -73,7 +73,7 @@ function feelingsToArray (inputs) {
     var array = [];
     for (var i = 0; i < inputs.length; i++) {
         var label = $(inputs[i].id);
-        console.log(label.attr('text'))
+        console.log(inputs[i].children.children)
         if (inputs[i].checked)
             arraya.push(inputs[i].value);
     }
