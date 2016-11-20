@@ -178,7 +178,6 @@ function get() {
 }
 
 /*-----------------------journal---------------------*/
->>>>>>> b9a627cf30f20db9e34a34a3cb72125d0ee31733
 
 var feelings_ids = ["happy", "content", "neutral", "excited", "angry", "frustrated", "sick", "sad", "disappointed"];
 
