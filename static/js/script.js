@@ -48,9 +48,9 @@ function populateResults(data) {
             dropDownInteractivity();
             $('.accordion').each(function(index) {
                 var i = (index % 4) + 1;
-                console.log(this);
                 console.log(i)
-                this.css("background-image", "url('../img/drop_down_" + index + ".png')")
+                this.style["background-image"] = "url('/static/img/drop_down_" + i + ".png')";
+                //this.css("background-image", "url('../img/drop_down_" + index + ".png')")
             });
 
         }
