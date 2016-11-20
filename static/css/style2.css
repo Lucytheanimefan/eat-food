@@ -18,15 +18,24 @@ button.accordion {
     transition: 0.4s;
 }
 
-.navbar-left{
-    background: none;
+.navbar{
+  background-image: url("../img/navigation_header.png");
+  background-size: 100% 100%;
 }
 
-#navheader{
-    max-width:100%; 
-    display:block;
-    background-image: url("../img/navigation_header.png");
-    background-size: 100% 100%;
+.nav{
+    width: 100%;
+}
+.nav li, a.navbar-brand{
+    width: 25% !important;
+}
+
+.nav a{
+    width: 100%;
+}
+
+.nav a:hover, .nav li:hover{
+    background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 button.accordion.active,

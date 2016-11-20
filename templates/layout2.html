@@ -13,7 +13,17 @@
 <body data-sidebar-color="sidebar-light" class="sidebar-light">
     <header>
         <img id="logo" src="static/img/logo.png">
-        <a href="#" class="navbar-left"><img id = "navheader" style = "min-width:100%; display:block;" src="static/img/navigation_header.png"></a>
+        <!--<img id="navheader" style="min-width:100%; display:block;" src="static/img/navigation_header.png">-->
+        <nav class="navbar navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#">Journal</a></li>
+                    <li><a href="/results">Meal Plan</a></li>
+                    <li><a href="/links">Links</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
     <div class="container-fluid">
         {% block body %}{% endblock %}

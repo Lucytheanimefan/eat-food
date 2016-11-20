@@ -3,7 +3,7 @@ import json
 import requests
 import server
 from requests.auth import HTTPBasicAuth
-from flask import Flask, request, jsonify,redirect, url_for
+from flask import Flask, request, jsonify,redirect, url_for, send_from_directory
 from flask import render_template
 from nutritionix import Nutritionix
 from nutrientCalculator import write_info
@@ -30,7 +30,7 @@ def results():
 def login():
 	open_account(request.json['username'], request.json['password'])
 	set_username(request.json['username'])
-	return redirect(url_for('search'))
+	return render_template("home.html")
 
 
 @app.route("/createaccount",methods=['POST','GET'])
@@ -39,7 +39,10 @@ def createaccount():
 
 @app.route("/")
 def hello():
-	return render_template('login.html')
+	if username is not "":
+		return render_template('home.html', username = username)
+	else:
+		return render_template('login.html')
 
 @app.route("/search")
 def search():
