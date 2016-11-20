@@ -57,7 +57,14 @@ def getResults():
 if __name__ == "__main__":
 	document = db.users.find({"username": "amanocha"})[0]
 	restrictions = document["restrictions"]
-	calories = document["calories"]
-	print getMealPlan(restrictions, calories, 5, 5, "vegetable")
+	calories_min = 100
+	max_total_fat = 100
+	max_cholesterol = 100
+	max_saturated_fat = 100
+	max_sodium = 100
+	max_sugar = 100
+	getMealPlan(restrictions,calories_min, 50, 5, "vegetable",max_total_fat,
+	max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
+
 	port = int(os.environ.get("PORT", 5000))
 	app.run(host='0.0.0.0', port=port)
