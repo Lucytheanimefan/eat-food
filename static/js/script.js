@@ -25,9 +25,8 @@ function populateResults(data) {
         success: function(response) {
             var data = response["result"];
             localStorage.setItem("mealPlan", data);
-            console.log(data);
-            $(".search").remove();
-            $("#main").append('<div class="col-md-3">' +
+            $("#bars").remove();
+            $("#main").append('<div id = "bars"><div class="col-md-3">' +
                 '<button class="accordion"></button>'+
                 '<div class="panel" id="panel1"><p></p></div><button class="accordion"></button><div class="panel" id="panel2">' +
                 '<p></p></div></div><div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel3">' +
@@ -35,11 +34,11 @@ function populateResults(data) {
                 '<div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel5"><p></p></div>' +
                 '<button class="accordion"></button><div class="panel" id="panel6"><p></p></div></div>' +
                 '<div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel7"><p></p></div>' +
-                '<button class="accordion"></button><div class="panel" id="panel8"><p></p></div></div>')
+                '<button class="accordion"></button><div class="panel" id="panel8"><p></p></div></div></div>')
             for (var i = 0; i < 8; i++) {
                 console.log(data[i]);
                 for (var j = 0; j < data[i]["meal_plan"].length; j++) {
-                    $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "\n");
+                    $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "<br>");
                 }
             }
             dropDownInteractivity();
@@ -62,6 +61,7 @@ var data = {}
 data["restrictions"] = [];
 data["feelings"] = [];
 
+var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs","tree_nut"]
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
     data['activity'] = $(this).text();
@@ -74,6 +74,11 @@ function getUserInput() {
     data['height_in'] = $('#height_in').val();
     data['age'] = $('#age').val();
     data['gender'] = $('#gender').val();
+    for (var i=0; i<restriction_ids.length; i++){
+        if($("#"+restriction_ids[i]).is(':checked')){
+            data["restrictions"].push(restriction_ids[i]);
+        }
+    }
     return data;
 }
 
@@ -81,10 +86,6 @@ $('#go').click(function() {
     var data = getUserInput();
     console.log(data);
     populateResults(data);
-});
-
-$('input:checkbox.restriction').each(function() {
-    data["restrictions"].push((this.checked ? $(this).val() : ""));
 });
 
 

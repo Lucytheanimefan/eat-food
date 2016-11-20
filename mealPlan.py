@@ -13,6 +13,8 @@ def canAdd(item, oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat,
     item['saturated_fat'] = 0
   if item['sugar'] is None:
     item['sugar'] = 0
+  if item['total_fat'] is None:
+    item['total_fat']=0
   return ((oneMealPlan['total_fat'] + item['total_fat'] <= max_total_fat) and
   (oneMealPlan['saturated_fat'] + item['saturated_fat'] <= max_saturated_fat) and
   (oneMealPlan['cholesterol'] + item['cholesterol'] <= max_cholesterol) and

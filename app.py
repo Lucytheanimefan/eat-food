@@ -25,6 +25,9 @@ def set_username(new_username):
 def results():
 	return render_template('results.html')
 
+@app.route("/links")
+def links():
+	return render_template('links.html')
 
 @app.route("/login",methods=['POST','GET'])
 def login():
@@ -53,12 +56,15 @@ def journal():
 	return render_template('journal.html')
 
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
+#restrictions, calories_min, limit_number, offset_value, food_type, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
 @app.route("/getResults",methods=['POST','GET'])
 def getResults():
 	print "---------------------in getResults"
 	print request.json
 	info = write_info(username, request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'], request.json['restrictions'])
-	plan = getMealPlan(restrictions,calories_min, 50, 20, "vegetable",max_total_fat,max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
+	print info
+	daily_values = info["daily_values"]
+	plan = getMealPlan(request.json["restrictions"],float(info["calories"]), 50, 20, "vegetable",float(daily_values["total_fat"]),float(daily_values["cholesterol"]),float(daily_values["saturated_fat"]),float(daily_values["sodium"]), float(daily_values["sugar"]))
 	return jsonify(result=plan)
 
 if __name__ == "__main__":
