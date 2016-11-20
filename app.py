@@ -8,6 +8,7 @@ from flask import render_template
 from nutritionix import Nutritionix
 from nutrientCalculator import write_info
 from mealPlan import getMealPlan
+from login import create_account
 
 app = Flask(__name__)
 username = ""
@@ -24,13 +25,16 @@ def set_username(new_username):
 def results():
 	return render_template('results.html')
 
-@app.route("/login")
-def login():
-	return render_template('login.html')
+@app.route("/createaccount",methods=['POST','GET'])
+def createaccount():
+	return create_account(request.json['username'], request.json['password'])
 
-@app.route("/home")
 @app.route("/")
 def hello():
+	return render_template('login.html')
+
+@app.route("/search")
+def search():
 	return render_template('main.html')
 
 
