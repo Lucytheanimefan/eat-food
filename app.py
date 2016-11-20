@@ -25,18 +25,16 @@ url = 'https://api.nutritionix.com/v1_1/search?'
 def results():
 	return render_template('results.html')
 
-@app.route("/createaccount")
+@app.route("/createaccount",methods=['POST','GET'])
 def createaccount():
 	return create_account(request.json['username'], request.json['password'])
 
-@app.route("/login")
-@app.route("/home")
 @app.route("/")
 def hello():
 	return render_template('login.html')
 
 @app.route("/search")
-def hello():
+def search():
 	return render_template('main.html')
 
 

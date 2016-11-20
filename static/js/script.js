@@ -40,7 +40,7 @@ $(document).on('click', '.dropdown-menu li a', function() {
 });
 
 function getUserInput() {
-	data['username']=username;
+    data['username'] = username;
     data['weight'] = $('#weight').val();
     data['height_ft'] = $('#height_ft').val();
     data['height_in'] = $('#height_in').val();
@@ -64,14 +64,15 @@ $('input:checkbox.restriction').each(function() {
 function createUser(username, password) {
     $.ajax({
         type: 'POST',
-        url: '/getResults',
-        data: JSON.stringify(data),
+        url: '/createaccount',
+        data: JSON.stringify({ "username": username, "password": password }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         processData: false,
         success: function(response) {
-            console.log('in ajax');
+            console.log('in ajax create user');
             console.log(response);
+            alert(response);
 
         }
     });
