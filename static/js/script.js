@@ -193,11 +193,12 @@ function getCalendar() {
     calendar(11);
     
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/getCalendar',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(response) {
+            console.log(response);
             var data = response["result"];
             console.log(data);
         }
