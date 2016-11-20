@@ -59,16 +59,16 @@ def journal():
 @app.route("/writeEmotions",methods=['POST','GET'])
 def write():
 	global username
-	print "IN WRITE EMOTIONS"
 	emotions = request.json['emotions']
 	notes = request.json['notes']
 	food = request.json['food']
-	print emotions
-	print notes
-	print food
-	print username
 	write_emotions(username, food, emotions, notes)
 
+@app.route("/getCalendar",methods=['POST','GET'])
+def getCalendar():
+	global username
+	return get_calendar(username)
+	
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
 #restrictions, calories_min, limit_number, offset_value, food_type, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
 @app.route("/getResults",methods=['POST','GET'])

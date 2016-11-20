@@ -170,7 +170,36 @@ function enterFeelings() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(response) {
-            console.log("Success")
+            console.log("Success");
         }
     });
 }
+
+function getCalendar() {
+    $.ajax({
+        type: 'POST',
+        url: '/getCalendar',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+            var data = response["result"];
+            makeCalendar(data);
+        }
+    });
+}
+
+function makeCalendar(data){
+    $("#calendar")
+}
+
+
+
+
+
+
+
+
+
+
+
+
