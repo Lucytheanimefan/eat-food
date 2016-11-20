@@ -46,7 +46,7 @@
             </label>
         </div>
     </div>
-    <TABLE BORDER=3 CELLSPACING=3 CELLPADDING=3> 
+    <TABLE ID = "calendar" BORDER=3 CELLSPACING=3 CELLPADDING=3> 
 <TR>
 <TD COLSPAN="7" ALIGN=center><B>November 2016</B></TD>    <!–– get the month from data base ––>
 </TR>
@@ -68,7 +68,10 @@
 <TD ALIGN=center></TD>
 <TD ALIGN=center></TD>
 <TD ALIGN=center>
+<p>
 1
+</p>
+<button onclick="myFunction()">Show Emoji</button>
 </TD>
 </TR>
 <TR> 
@@ -118,6 +121,15 @@
 
 </TR>
 </TABLE>
+
+<script>
+function myFunction() {
+    var table = document.getElementById("myTable");
+    var x = table.rows[6].cells;
+    x[5].innerHTML = "NEW CONTENT";
+}
+</script>
+
     <div class="col-md-4">
         <div class="form-group">
             <label for="notes">Notes:</label>
@@ -125,6 +137,8 @@
         </div>
         <button type="button" class="btn btn-default" id="submit" onclick="enterFeelings()">Go</button>
     </div>
+
+
 
     <!---YUMIN'S CALENDAR HERE->
 
