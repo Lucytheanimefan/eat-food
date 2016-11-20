@@ -5,8 +5,14 @@ nix = Nutritionix(app_id="7f770e5d", api_key="dae4065c600b6b161789a27471167ccd")
 
 
 def canAdd(item, oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
-  print(item)
-  print("one meal plan")
+  print "Saturated fat-----------"
+  print oneMealPlan['saturated_fat']
+  print item['saturated_fat']
+  print "----------------------"
+  if item['saturated_fat'] is None:
+    item['saturated_fat'] = 0
+  if item['sugar'] is None:
+    item['sugar'] = 0
   return ((oneMealPlan['total_fat'] + item['total_fat'] <= max_total_fat) and
   (oneMealPlan['saturated_fat'] + item['saturated_fat'] <= max_saturated_fat) and
   (oneMealPlan['cholesterol'] + item['cholesterol'] <= max_cholesterol) and
@@ -65,14 +71,18 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
     tel['calcium'] = item_i['nf_calcium_dv']
     tel['iron'] = item_i['nf_iron_dv']
     allFood.append(tel)
-  
+
+  # this should a list of 8 mean plans, and each is represented as a dictionary  
   allMealPlans = []
+  
+  #while loop each time getting a meal plan, so loop 8 times
   i = 0
   while (i < 8):
     oneMealPlan = {}
     oneMealPlan['name'] = []
 
-
+    #each mean plan dictionary of meal plan will have those values calculated
+    # names are all the food in this meal plan
     allIngredients = ['calories','vitamin_c', 'total_fat','carbs','saturated_fat','sodium', 'sugar','fiber','cholesterol','calcium','iron']
 
     for x in allIngredients:
@@ -83,6 +93,7 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
         print "check"
         oneMealPlan['name'].append(allFood[item]['name'])
         for j in allIngredients:
+          #this if check to see if some variable is none does not work, need Debug
           if isinstance(allFood[item][j], basestring):
           #if allFood[item][j] == 'None' :
             print "isNone"
@@ -92,6 +103,10 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
           print "the ingredient: " + j
          # print "y value is " + y
           print allFood[item][j]
+          if oneMealPlan[j] is None:
+            oneMealPlan[j]=0
+          if y is None:
+            y = 0
           oneMealPlan[j] = oneMealPlan[j]+ y
       allMealPlans.append(oneMealPlan)
     i = i + 1
