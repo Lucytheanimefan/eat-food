@@ -56,6 +56,10 @@ def search():
 def edit_info():
 	return get_info(username)
 
+@app.route("/calendar")
+def calendar():
+	return render_template('calendar.html')
+
 @app.route("/edit")
 def edit():
 	data = get_info(username)

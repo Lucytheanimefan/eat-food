@@ -1,18 +1,21 @@
 import server
 import datetime
+import re
 
 db = server.get_db()
 
 def write_emotions(username, food, emotions, notes):
     date = get_date(datetime.date.today())
-    print date
+    #print date
     entry = {"food":food.upper(), "emotions": emotions, "notes": notes}
-    print entry
+    #print entry
     entries = []
-    entries.append(db.users.find({"username":username})[0])
-    print entries
+    print(db.users.find({"username": username, date:{"$exists": True}}).count())
+    if (db.users.find({"username": username, date:{"$exists": True}}).count() > 0):
+        entries.append(db.users.find({"username":username})[0][date])
+    #print entries
     entries.append(entry)
-    print entries 
+    #print entries
     db.users.update(
         {"username":username},
         {"$set": {date: entries}}
@@ -28,5 +31,11 @@ value: [{"food": food, "emotions": (array of words), "notes": notes}, {"food2": 
 def get_calendar(username):
     doc = db.users.find({"username":username})[0]
     entries = {}
-    entries["date"] = doc["date"]
+    for key in doc:
+        if (re.match("[A-Za-z]+\s+[0-9]+,\s+[0-9]+", key)):
+            entries[key] = doc[key]
+    print entries
     return entries
+
+#write_emotions("amanocha", "broccoli", ["happy"], "")
+#get_calendar("amanocha")
