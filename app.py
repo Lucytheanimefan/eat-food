@@ -10,6 +10,7 @@ import json
 import nutrientCalculator
 from nutrientCalculator import get_info
 from mealPlan import getMealPlan
+from login import create_account
 
 app = Flask(__name__)
 
@@ -24,12 +25,17 @@ url = 'https://api.nutritionix.com/v1_1/search?'
 def results():
 	return render_template('results.html')
 
-@app.route("/login")
-def login():
-	return render_template('login.html')
+@app.route("/createaccount")
+def createaccount():
+	return create_account(request.json['username'], request.json['password'])
 
+@app.route("/login")
 @app.route("/home")
 @app.route("/")
+def hello():
+	return render_template('login.html')
+
+@app.route("/search")
 def hello():
 	return render_template('main.html')
 
@@ -39,7 +45,7 @@ def hello():
 def getResults():
 	print "---------------------in getResults"
 	print request.json
-	info = get_info(request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'])
+	info = get_info(request.json['username'],request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'], request.json['restrictions'])
 	return jsonify(result=json)
 
 if __name__ == "__main__":

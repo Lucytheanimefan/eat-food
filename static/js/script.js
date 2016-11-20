@@ -32,12 +32,15 @@ function populateResults(data) {
 }
 /*----------------get user input-------------------------*/
 var data = {}
+data["restrictions"] = [];
+
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
     data['activity'] = $(this).text();
 });
 
 function getUserInput() {
+	data['username']=username;
     data['weight'] = $('#weight').val();
     data['height_ft'] = $('#height_ft').val();
     data['height_in'] = $('#height_in').val();
@@ -50,7 +53,11 @@ $('#go').click(function() {
     var data = getUserInput();
     console.log(data);
     populateResults(data);
-})
+});
+
+$('input:checkbox.restriction').each(function() {
+    data["restrictions"].push((this.checked ? $(this).val() : ""));
+});
 
 
 /*-----------------user----------------------*/

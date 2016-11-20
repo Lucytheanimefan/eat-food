@@ -28,3 +28,4 @@ def getMealPlan(restrictions, calories_max, limit_number, offset_value, food_typ
 
   return response
 
+#value = response["food"]
