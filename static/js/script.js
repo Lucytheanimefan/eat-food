@@ -144,7 +144,6 @@ function login(username, password) {
             console.log('in ajax login user');
             console.log(response);
             alert(response);
-
         }
     });
 
