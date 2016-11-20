@@ -16,8 +16,8 @@ def create_account(username, password):
         return "Success! Your account has been created."
 
 def open_account(username, password):
-    if (db.users.find({"username": "amanocha"})[0]["password"] != password):
-        return "Invalid username/password."
-    else:
-        #app.set_username(username)
-        return "Success!"
+	print "call open_account"
+	if (db.users.find({"username": username})[0]["password"] is not password):
+		return "Invalid username/password."
+	else:
+		return "Success!"

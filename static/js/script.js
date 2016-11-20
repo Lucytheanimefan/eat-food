@@ -68,11 +68,11 @@ function createUser(username, password) {
         data: JSON.stringify({ "username": username, "password": password }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        processData: false,
         success: function(response) {
             console.log('in ajax create user');
             console.log(response);
             alert(response);
+            window.location.replace("http://stackoverflow.com");
 
         }
     });
@@ -85,7 +85,6 @@ function login(username, password) {
         data: JSON.stringify({ "username": username, "password": password }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        processData: false,
         success: function(response) {
             console.log('in ajax login user');
             console.log(response);
