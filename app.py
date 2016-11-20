@@ -58,7 +58,8 @@ def getResults():
 	print "---------------------in getResults"
 	print request.json
 	info = write_info(username, request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'], request.json['restrictions'])
-	return jsonify(result=json)
+	plan = getMealPlan(restrictions,calories_min, 50, 20, "vegetable",max_total_fat,max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
+	return jsonify(result=plan)
 
 if __name__ == "__main__":
 	document = db.users.find({"username": "amanocha"})[0]
@@ -69,9 +70,5 @@ if __name__ == "__main__":
 	max_saturated_fat = document["saturated_fat"]
 	max_sodium = document["sodium"]
 	max_sugar = document["sugar"]
-	#getMealPlan(restrictions,calories_min, 50, 5, "vegetable",max_total_fat,
-	#
-	# max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
-
 	port = int(os.environ.get("PORT", 5000))
 	app.run(host='0.0.0.0', port=port)

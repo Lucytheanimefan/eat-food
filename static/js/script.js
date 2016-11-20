@@ -22,13 +22,40 @@ function populateResults(data) {
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        processData: false,
         success: function(response) {
-            console.log('in ajax');
-            console.log(response);
+            var data = response["result"];
+            localStorage.setItem("mealPlan", data);
+            console.log(data);
+            $(".search").remove();
+            $("#main").append('<div class="col-md-3">' +
+                '<button class="accordion"></button>'+
+                '<div class="panel" id="panel1"><p></p></div><button class="accordion"></button><div class="panel" id="panel2">' +
+                '<p></p></div></div><div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel3">' +
+                '<p></p></div><button class="accordion"></button><div class="panel" id="panel4"><p></p></div></div>' +
+                '<div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel5"><p></p></div>' +
+                '<button class="accordion"></button><div class="panel" id="panel6"><p></p></div></div>' +
+                '<div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel7"><p></p></div>' +
+                '<button class="accordion"></button><div class="panel" id="panel8"><p></p></div></div>')
+            for (var i = 0; i < 8; i++) {
+                console.log(data[i]);
+                for (var j = 0; j < data[i]["meal_plan"].length; j++) {
+                    $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "\n");
+                }
+            }
+            dropDownInteractivity();
 
         }
     });
+}
+
+function populateDropdown() {
+    var data = localStorage.mealPlan;
+    for (var i = 0; i < 8; i++) {
+        console.log(data[i]);
+        for (var j = 0; j < data[i]["meal_plan"].length; j++) {
+            $("#panel" + (i + 1) + " p").append(data[i]["meal_plan"][j] + "\n");
+        }
+    }
 }
 /*----------------get user input-------------------------*/
 var data = {}
@@ -41,7 +68,7 @@ $(document).on('click', '.dropdown-menu li a', function() {
 });
 
 function getUserInput() {
-    data['username'] = username;
+    //data['username'] = username;
     data['weight'] = $('#weight').val();
     data['height_ft'] = $('#height_ft').val();
     data['height_in'] = $('#height_in').val();
@@ -60,16 +87,8 @@ $('input:checkbox.restriction').each(function() {
     data["restrictions"].push((this.checked ? $(this).val() : ""));
 });
 
-var d = document
-var feelingsButton = d.getElementById('submit')
-var feelings = d.getElementById('feelingsForm')
 
-feelingsButton.onclick = function () {
-    var feelingsArray = feelingsToArray(feelings.children)
-    //console.log(feelings.children[0]);
-}
-
-function feelingsToArray (inputs) {
+function feelingsToArray(inputs) {
     var array = [];
     for (var i = 0; i < inputs.length; i++) {
         var label = $(inputs[i].id);
@@ -80,14 +99,14 @@ function feelingsToArray (inputs) {
     return array;
 }
 
-$('label.myClass select').each(function(){
+$('label.myClass select').each(function() {
     var inputVal = $(this).val();
 });
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
-	console.log("Username: "+username);
-	console.log("password: "+password);
+    console.log("Username: " + username);
+    console.log("password: " + password);
     $.ajax({
         type: 'POST',
         url: '/createaccount',
@@ -121,7 +140,10 @@ function login(username, password) {
 }
 
 function enterFeelings(feelings) {
+    var feelingsButton = $('#submit')
+    var feelings = $('#feelingsForm')
     console.log(feelings)
     data["feelings"] = feelings;
+    var feelingsArray = feelingsToArray(feelings.children);
 
 }
