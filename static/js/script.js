@@ -72,7 +72,7 @@ function populateDropdown() {
 var data = {}
 data["restrictions"] = [];
 data["feelings"] = [];
-data['activity']="moderate";
+data['activity'] = "moderate";
 var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs", "tree_nut"]
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
@@ -188,9 +188,10 @@ function enterFeelings() {
     });
 }
 
+
 function getCalendar() {
-    calendar(11);
-    
+    //calendar(11);
+
     $.ajax({
         type: 'GET',
         url: '/getCalendar',
@@ -200,17 +201,24 @@ function getCalendar() {
             console.log(response);
             var data = response["result"];
             console.log(data);
+
+            var table = $('<table></table>').addClass('foo');
+            for (var date in data) {
+                console.log("date: "+date);
+                for (var i = 0; i < data[date].length; i++) {
+                    var img = "<img src='/static/img/" + data[date][i]["emotions"][0] + ".png'>"
+                    var row = $('<tr></tr>').addClass('bar').html("Food: "+data[date][i]["food"]+", "+ date.toString()+img);
+                    table.append(row);
+                }
+            }
+
+            $('#calendar').append(table);
         }
     });
-    
+
 }
 
-function makeCalendar(data) {
-    $("#calendar").append("table");
-    for (var i = 0; i < data.length; i++) {
-        $("#calendar table").append();
-    }
-}
+
 
 
 function calendar(month) {
