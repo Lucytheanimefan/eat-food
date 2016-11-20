@@ -30,7 +30,7 @@ def results():
 def login():
 	open_account(request.json['username'], request.json['password'])
 	set_username(request.json['username'])
-	redirect(url_for('search'))
+	return redirect(url_for('search'))
 
 
 @app.route("/createaccount",methods=['POST','GET'])
