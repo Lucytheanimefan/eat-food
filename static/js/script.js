@@ -88,7 +88,7 @@ $('#go').click(function() {
     populateResults(data);
 });
 
-
+/*
 feelingsButton.onclick = function () {
     var feelingsArray = feelingsToArray(feelings.children)
     //console.log(feelings.children[0]);
@@ -107,7 +107,7 @@ function feelingsToArray (inputs) {
 
 $('label.myClass select').each(function(){
     var inputVal = $(this).val();
-});
+});*/
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
