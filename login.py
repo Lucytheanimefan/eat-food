@@ -9,6 +9,9 @@ def create_account(username, password):
     :param password: password of individual
     :return: description of success of account creation
     """
+    print "create account!"
+    print username
+    print password
     if (db.users.find({"username": username}).count() > 0):
         return "User already exists!"
     else:

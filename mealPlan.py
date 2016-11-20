@@ -44,7 +44,7 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
   ).json()
 
   allFood = []  
-
+  print response
   for i in response['hits']:
     tel = {}  
     item_i = i['fields']
