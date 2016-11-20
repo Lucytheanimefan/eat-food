@@ -56,3 +56,4 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
 
   return response
 
+#value = response["food"]
