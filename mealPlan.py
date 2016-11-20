@@ -36,12 +36,24 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
    'nf_dietary_fiber','nf_protein','nf_calcium_dv', 'nf_iron_dv']
   response = nix.search().nxql(
     filters={
-    "nf_calories": {
-    "lte": calories_min * 1.5,
+    "nf_sodium": {
+    "lte": max_sodium,
+    },
+    "nf_sugars": {
+    "lte": max_sugar,
+    },
+    "nf_total_fat": {
+    "lte": max_total_fat,
+    },
+    "nf_saturated_fat": {
+    "lte": max_saturated_fat,
+    },
+    "nf_cholesterol": {
+    "lte": max_cholesterol,
+    },
     "not":{
      "item_type":1, #not from restaurant
      "nf_serving_weight_grams":None
-    }
     }
   },
   sort = {
@@ -55,6 +67,8 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
 
   allFood = []  
   #print response
+  print "length"
+  print len(response['hits'])
   for i in response['hits']:
     tel = {}  
     item_i = i['fields']
@@ -75,12 +89,15 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
     tel['iron'] = item_i['nf_iron_dv']
     allFood.append(tel)
 
-  # this should a list of 8 mean plans, and each is represented as a dictionary  
+  # this should a list of 8 mea; plans, and each is represented as a dictionary  
+  
+  allFood = allFood + allFood + allFood + allFood
+
   allMealPlans = []
   
   #while loop each time getting a meal plan, so loop 8 times
   i = 0
-  while (i < 8*8):
+  while (i < 8):
     oneMealPlan = {}
     oneMealPlan['meal_plan'] = []
 
@@ -95,15 +112,14 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
     #oneMealPlan['item_name']=allFood[i]['name']
     #print allFood[i]['name']
 
-    for item in range(i, len(allFood)):
+    for item in range(i * 7, len(allFood)):
       if (canAdd(allFood[item], oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar)):
-        #print "check"
         oneMealPlan['meal_plan'].append(allFood[item]['name'])
+        #print "i value"
+        #print i * 5
         for j in allIngredients:
           #this if check to see if some variable is none does not work, need Debug
           if isinstance(allFood[item][j], basestring):
-          #if allFood[item][j] == 'None' :
-            #print "isNone"
             y = 0
           else:
             y = allFood[item][j]
@@ -112,10 +128,13 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
           if y is None:
             y = 0
           oneMealPlan[j] = oneMealPlan[j]+ y
+    #print "++++++++++each meal plan+++++++++++++++"
+    #for w in oneMealPlan['meal_plan']:
+    #  print w 
     allMealPlans.append(oneMealPlan)
-    i = i + 8
+    i = i + 1
 
-
+  #print len(allMealPlans)
   return allMealPlans
 
 #value = response["food"]
