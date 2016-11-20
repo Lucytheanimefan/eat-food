@@ -176,6 +176,8 @@ function enterFeelings() {
     var feelingsArray = feelingsToArray();
     var notes = $("#notes").val();
     var food = $("#food").val();
+    console.log("feelings array: ");
+    console.log(feelingsArray);
     $.ajax({
         type: 'POST',
         url: '/writeEmotions',
@@ -204,10 +206,13 @@ function getCalendar() {
 
             var table = $('<table></table>').addClass('foo');
             for (var date in data) {
-                console.log("date: "+date);
+                console.log("date: " + date);
                 for (var i = 0; i < data[date].length; i++) {
-                    var img = "<img src='/static/img/" + data[date][i]["emotions"][0] + ".png'>"
-                    var row = $('<tr></tr>').addClass('bar').html("Food: "+data[date][i]["food"]+", "+ date.toString()+img);
+                    if (data[date][i]["emotions"][0]!=null) {
+                        var img = "<img src='/static/img/" + data[date][i]["emotions"][0] + ".png'>";
+                    } else {
+                        var img = ""; }
+                    var row = $('<tr></tr>').addClass('bar').html("Food: " + data[date][i]["food"] + ", " + date.toString() + img);
                     table.append(row);
                 }
             }
