@@ -188,18 +188,9 @@ function getCalendar() {
     });
 }
 
-function makeCalendar(data){
-    $("#calendar")
+function makeCalendar(data) {
+    $("#calendar").append("table");
+    for (var i = 0; i < data.length; i++) {
+        $("#calendar table").append();
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
