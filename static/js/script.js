@@ -99,11 +99,6 @@ $('#go').click(function() {
     populateResults(data);
 });
 
-
-$('label.myClass select').each(function() {
-    var inputVal = $(this).val();
-});
-
 /*-----------------user----------------------*/
 function createUser(username, password) {
     console.log("Username: " + username);
