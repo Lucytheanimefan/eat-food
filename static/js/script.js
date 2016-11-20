@@ -27,7 +27,7 @@ function populateResults(data) {
             localStorage.setItem("mealPlan", data);
             $("#bars").remove();
             $("#main").append('<div id = "bars"><div class="col-md-3">' +
-                '<button class="accordion"></button>'+
+                '<button class="accordion"></button>' +
                 '<div class="panel" id="panel1"><p></p></div><button class="accordion"></button><div class="panel" id="panel2">' +
                 '<p></p></div></div><div class="col-md-3"><button class="accordion"></button><div class="panel" id="panel3">' +
                 '<p></p></div><button class="accordion"></button><div class="panel" id="panel4"><p></p></div></div>' +
@@ -61,7 +61,7 @@ var data = {}
 data["restrictions"] = [];
 data["feelings"] = [];
 
-var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs","tree_nut"]
+var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs", "tree_nut"]
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
     data['activity'] = $(this).text();
@@ -74,8 +74,8 @@ function getUserInput() {
     data['height_in'] = $('#height_in').val();
     data['age'] = $('#age').val();
     data['gender'] = $('#gender').val();
-    for (var i=0; i<restriction_ids.length; i++){
-        if($("#"+restriction_ids[i]).is(':checked')){
+    for (var i = 0; i < restriction_ids.length; i++) {
+        if ($("#" + restriction_ids[i]).is(':checked')) {
             data["restrictions"].push(restriction_ids[i]);
         }
     }
@@ -89,20 +89,6 @@ $('#go').click(function() {
 });
 
 
-function feelingsToArray(inputs) {
-    var array = [];
-    for (var i = 0; i < inputs.length; i++) {
-        var label = $(inputs[i].id);
-        console.log(label.attr('text'))
-        if (inputs[i].checked)
-            arraya.push(inputs[i].value);
-    }
-    return array;
-}
-
-$('label.myClass select').each(function() {
-    var inputVal = $(this).val();
-});
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
@@ -140,11 +126,33 @@ function login(username, password) {
 
 }
 
-function enterFeelings(feelings) {
-    var feelingsButton = $('#submit')
-    var feelings = $('#feelingsForm')
-    console.log(feelings)
-    data["feelings"] = feelings;
-    var feelingsArray = feelingsToArray(feelings.children);
+var feelings_ids = ["happy", "content", "neutral", "excited", "angry", "frustrated", "sick", "sad", "disappointed"];
+
+feelings_ids.map(function(id) {
+    $("#" + id).click(function() {
+        console.log($("#" + id));
+        var val = $("#" + id).attr("value");
+        console.log(val);
+        $("#" + id).attr("value", -1 * parseInt(val));
+
+    });
+})
+
+
+
+
+function feelingsToArray() {
+    var data = [];
+    for (var i = 0; i < feelings_ids.length; i++) {
+        if (parseInt($("#" + feelings_ids[i]).attr("value")) > 0) {
+            data.push(feelings_ids[i]);
+        }
+    }
+    return data;
+}
+
+function enterFeelings() {
+    var feelingsArray = feelingsToArray();
+    console.log(feelingsArray);
 
 }
