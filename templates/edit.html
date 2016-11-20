@@ -28,7 +28,7 @@
                     Activity
                     <span class="caret"></span>
                 </button>
-                <ul id="activitylist" value= {{activity}} class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <ul id="activitylist" value={{activity}} class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="#">bmr</a></li>
                     <li><a href="#">mild</a></li>
                     <li><a href="#">moderate</a></li>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="row search" id = "restrictions" value = {{restrictions}}>
+    <div class="row search" id="restrictions" value={ {restrictions}}>
         <label class="checkbox-inline">
             <input type="checkbox" class="restriction" id="gluten" value="gluten">Gluten free</label>
         <label class="checkbox-inline">
@@ -60,7 +60,19 @@
         <button class="button" id="go">Go</button>
     </div>
     <script type="text/javascript">
+    var restriction_ids = ["gluten", "wheat", 'soybeans', "peanuts", "dairy", "shellfish", "milk", "eggs", "tree_nut"]
     
+    function updateRestrictionsActivitiesInEdit() {
+        var restrictions = $("#restrictions").attr("value");
+        var activities = $("#activitylist").attr("value");
+        for (var i = 0; i < restrictions.length; i++) {
+            $("#" + restriction_ids[i]).prop("checked", true);
+        }
+        console.log(activities);
+        $('#dropdownMenu1').text(activities);
+        //data['activity'] = activities;
+    }
+
 
     updateRestrictionsActivitiesInEdit();
     </script>

@@ -16,6 +16,7 @@ dropDownInteractivity();
 
 /*------------------Populate dropdowns---------------------*/
 function populateResults(data) {
+    console.log(data);
     $.ajax({
         type: 'POST',
         url: '/getResults',
@@ -93,18 +94,9 @@ function getUserInput() {
     return data;
 }
 
-function updateRestrictionsActivitiesInEdit() {
-    var restrictions = $("#restrictions").attr("value");
-    var activities = $("#activitylist").attr("value");
-    for (var i = 0; i < restrictions.length; i++) {
-        $("#" + restriction_ids[i]).prop("checked", true);
-    }
-    console.log(activities);
-    $('#dropdownMenu1').text(activities);
-    data['activity'] = activities;
-}
 
 $('#go').click(function() {
+    console.log("go pressed")
     var data = getUserInput();
     populateResults(data);
 });
