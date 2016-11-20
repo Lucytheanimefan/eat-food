@@ -8,6 +8,8 @@
     <title>Eat Food!</title>
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/css/bootstrap.min.css') }}">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style2.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
 </head>
 
 <body data-sidebar-color="sidebar-light" class="sidebar-light">
@@ -17,10 +19,10 @@
         <nav class="navbar navbar-inner">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/"></a></li>
-                    <li><a href="/journal">Journal</a></li>
-                    <li><a href="/results">Meal Plan</a></li>
-                    <li><a href="/links">Links</a></li>
+                    <li class="active"><a href="/"> '  </a></li>
+                    <li><a href="/journal">  ' </a></li>
+                    <li><a href="/search">  '  </a></li>
+                    <li><a href="/links">  '</a></li>
                 </ul>
             </div>
         </nav>
@@ -28,8 +30,6 @@
     <div class="container-fluid">
         {% block body %}{% endblock %}
     </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script type="text/javascript">
         jQuery(function ($) {
