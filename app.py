@@ -6,6 +6,7 @@ import requests
 import json
 import nutrientCalculator
 from nutrientCalculator import get_info
+from mealPlan import getMealPlan
 
 app = Flask(__name__)
 
@@ -36,5 +37,6 @@ def getResults():
 	return jsonify(result=json)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+	print getMealPlan(["eggs","fish","gluten"],100, 5, 5, "vegetable")
+	port = int(os.environ.get("PORT", 5000))
+	app.run(host='0.0.0.0', port=port)
