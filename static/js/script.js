@@ -106,10 +106,22 @@ function updateRestrictionsActivitiesInEdit() {
 
 $('#go').click(function() {
     var data = getUserInput();
-    console.log(data);
     populateResults(data);
 });
 
+function populateMealPlanResults() {
+    $.ajax({
+        type: 'POST',
+        url: '/get_meal_plan_info',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+            var data = response["result"];
+            populateResults(data);
+        }
+    });
+}
 /*-----------------user----------------------*/
 function createUser(username, password) {
     console.log("Username: " + username);
