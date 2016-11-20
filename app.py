@@ -16,6 +16,11 @@ def results():
 	#print nix.search('pizza').json()
 	return render_template('results.html')
 
+@app.route("/login")
+def login():
+	#print nix.search('pizza').json()
+	return render_template('login.html')
+
 @app.route("/home")
 @app.route("/")
 def hello():
