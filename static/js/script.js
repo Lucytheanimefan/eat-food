@@ -153,7 +153,6 @@ feelings_ids.map(function(id) {
         var val = $("#" + id).attr("value");
         console.log(val);
         $("#" + id).attr("value", -1 * parseInt(val));
-
     });
 })
 
