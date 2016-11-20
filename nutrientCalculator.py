@@ -1,3 +1,8 @@
+import server
+import login
+
+db = server.get_db()
+
 def convert_height(feet, inches):
     """
     Converts height given in feet and inches into height in centimeters
@@ -28,9 +33,10 @@ def get_activity_factor(activity):
     activity_factor = activity_level_map[activity]
     return activity_factor
 
-def calculate_calories(gender, age, height, weight, activity_factor):
+def calculate_calories(username, gender, age, height, weight, activity_factor):
     """
     Calculates the number of calories an individual should consume in a day
+    :param username: username of individual
     :param gender: gender of individual
     :param age: age of individual
     :param height: height of individual in centimeters
@@ -44,31 +50,50 @@ def calculate_calories(gender, age, height, weight, activity_factor):
         BMR = 10*weight + 6.25*height - 5*age + 5
     else:
         BMR = 10 * weight + 6.25 * height - 5 * age - 161
-    return BMR*activity_factor
 
-def calculate_daily_values(calories):
+    calories = round(BMR*activity_factor)
+
+    db.users.update(
+        {"username":username},
+        {"$set":{"calories":calories}}
+    )
+
+    return calories
+
+def calculate_daily_values(username, calories):
     """
     Calculates the recommended daily values for each nutrient based on the number of calories to consume
+    :param username: username of individual
     :param calories: number of calories the individual should consume
     :return: dictionary containing the recommended daily values where the key is the nutrient
     """
-    daily_value_2000 = {"total_fat": 65, "saturated_fat": 20, "trans_fat": 0, "cholesterol": 0.3, "sodium": 2.4,
-                       "carbohydrate": 300, "dietary_fiber": 25, "protein": 50, "sugar": 25, "vitaminA": 0.0015,
-                       "vitaminC": 0.06}
+    daily_value_2000 = {"total_fat": 65, "saturated_fat": 20, "cholesterol": 300, "sodium": 2400, "carbohydrate": 300,
+                        "dietary_fiber": 25, "protein": 50, "sugar": 25, "vitaminA": 1.5, "vitaminC": 60,
+                        "calcium": 1000, "iron": 18}
     daily_values = {}
     for nutrient in daily_value_2000:
-        daily_values[nutrient] = daily_value_2000[nutrient]*calories/2000
+        amount = round(daily_value_2000[nutrient]*calories/2000)
+        daily_values[nutrient] = amount
+        db.users.update(
+            {"username": username},
+            {"$set": {nutrient: amount}}
+        )
     return daily_values
 
-def get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level):
+def get_info(username, gender_string, age_string, height_feet, height_inches, weight_string, activity_level, restrictions):
     gender = gender_string.lower()
     age = int(age_string)
     height = convert_height(int(height_feet), int(height_inches))
     weight = convert_weight(int(weight_string))
     activity_level = (activity_level.split(' ')[0]).lower()
     activity_factor = get_activity_factor(activity_level)
-    calories = calculate_calories(gender, age, height, weight, activity_factor)
+    calories = calculate_calories(username, gender, age, height, weight, activity_factor)
+    daily_values = calculate_daily_values(username, calories)
 
-    info = calculate_daily_values(calories)
-    info["calories"] = calories
-    return info
+    db.users.update(
+        {"username": username},
+        {"$set": {"restrictions": restrictions}}
+    )
+
+print(login.create_account("amanocha", "password"))
+get_info("amanocha", "female", 19, 5, 2, 120, "moderate")
