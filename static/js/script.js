@@ -58,7 +58,6 @@ function populateResults(data) {
 }
 
 
-
 function populateDropdown() {
     var data = localStorage.mealPlan;
     for (var i = 0; i < 8; i++) {
@@ -136,6 +135,9 @@ function login(username, password) {
 
 }
 
+
+/*-----------------------journal---------------------*/
+
 var feelings_ids = ["happy", "content", "neutral", "excited", "angry", "frustrated", "sick", "sad", "disappointed"];
 
 feelings_ids.map(function(id) {
@@ -146,9 +148,6 @@ feelings_ids.map(function(id) {
         $("#" + id).attr("value", -1 * parseInt(val));
     });
 })
-
-
-
 
 function feelingsToArray() {
     var data = [];
@@ -162,6 +161,16 @@ function feelingsToArray() {
 
 function enterFeelings() {
     var feelingsArray = feelingsToArray();
-    console.log(feelingsArray);
-
+    var notes = $("#notes").val();
+    var food = $("#food").val();
+    $.ajax({
+        type: 'POST',
+        url: '/writeEmotions',
+        data: JSON.stringify({ "emotions": feelingsArray, "notes": notes, "food": food }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+            console.log("Success")
+        }
+    });
 }
