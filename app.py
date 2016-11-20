@@ -9,6 +9,7 @@ from nutritionix import Nutritionix
 from nutrientCalculator import *
 from mealPlan import getMealPlan
 from login import *
+from journal import *
 
 app = Flask(__name__)
 username = ""
@@ -65,28 +66,28 @@ def edit():
 def journal():
 	return render_template('journal.html')
 
+@app.route("/writeEmotions",methods=['POST','GET'])
+def write():
+	global username
+	emotions = request.json['emotions']
+	notes = request.json['notes']
+	food = request.json['food']
+	write_emotions(username, food, emotions, notes)
+
+@app.route("/getCalendar",methods=['POST','GET'])
+def getCalendar():
+	global username
+	return get_calendar(username)
+	
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
 #restrictions, calories_min, limit_number, offset_value, food_type, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
 @app.route("/getResults",methods=['POST','GET'])
 def getResults():
-	print "---------------------in getResults"
-	print request.json
 	info = write_info(username, request.json['gender'], request.json['age'],request.json['height_ft'],request.json["height_in"],request.json['weight'],request.json['activity'], request.json['restrictions'])
-	print info
 	daily_values = info["daily_values"]
 	plan = getMealPlan(request.json["restrictions"],float(info["calories"]), 50, 20, "vegetable",float(daily_values["total_fat"]),float(daily_values["cholesterol"]),float(daily_values["saturated_fat"]),float(daily_values["sodium"]), float(daily_values["sugar"]))
 	return jsonify(result=plan)
 
 if __name__ == "__main__":
-	document = db.users.find({"username": "amanocha"})[0]
-	restrictions = document["restrictions"]
-	calories_min = document["calories"]
-	max_total_fat = document["total_fat"]
-	max_cholesterol = document["cholesterol"]
-	max_saturated_fat = document["saturated_fat"]
-	max_sodium = document["sodium"]
-	max_sugar = document["sugar"]
-	# comment out this following line
-	#plan = getMealPlan(['eggs', 'peanuts'],1972.0, 50, 20, "vegetable",64.0,296.0,20.0,2366, 25)
 	port = int(os.environ.get("PORT", 5000))
 	app.run(host='0.0.0.0', port=port)
