@@ -51,3 +51,21 @@ $('#go').click(function() {
     console.log(data);
     populateResults(data);
 })
+
+
+/*-----------------user----------------------*/
+function createUser(username, password) {
+    $.ajax({
+        type: 'POST',
+        url: '/getResults',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        processData: false,
+        success: function(response) {
+            console.log('in ajax');
+            console.log(response);
+
+        }
+    });
+}

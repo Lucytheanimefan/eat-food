@@ -14,18 +14,15 @@ nix = Nutritionix(app_id="7f770e5d", api_key="dae4065c600b6b161789a27471167ccd")
 
 @app.route("/results")
 def results():
-	#print nix.search('pizza').json()
 	return render_template('results.html')
 
 @app.route("/login")
 def login():
-	#print nix.search('pizza').json()
 	return render_template('login.html')
 
 @app.route("/home")
 @app.route("/")
 def hello():
-	#print nix.search('pizza').json()
 	return render_template('main.html')
 
 #get_info(gender_string, age_string, height_feet, height_inches, weight_string, activity_level)
