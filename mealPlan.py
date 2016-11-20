@@ -5,7 +5,9 @@ nix = Nutritionix(app_id="7f770e5d", api_key="dae4065c600b6b161789a27471167ccd")
 
 
 def canAdd(item, oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
-  return ((oneMealPlan['total_fat'] + item['total_fat'] <= max_total_fat) and 
+  print(item)
+  print("one meal plan")
+  return ((oneMealPlan['total_fat'] + item['total_fat'] <= max_total_fat) and
   (oneMealPlan['saturated_fat'] + item['saturated_fat'] <= max_saturated_fat) and
   (oneMealPlan['cholesterol'] + item['cholesterol'] <= max_cholesterol) and
   (oneMealPlan['sodium'] + item['sodium'] <= max_sodium) and

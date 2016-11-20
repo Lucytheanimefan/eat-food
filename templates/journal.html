@@ -1,24 +1,56 @@
-{% extends "layout.html" %} {% block body %}
+{% extends "layout2.html" %} {% block body %}
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <label for="food">What did you eat?:</label>
+            <label for="food">What did you eat?</label>
             <input type="text" placeholder="Food" class="form-control" id="food">
         </div>
-        <div class="form-group">
-            <label for="feelings">Height:</label>
-            <img src="/static/img/happy.png" alt="happy" style="width:83px;height:75px;">
-        </div>
-        <div class="form-group">
-            <label for="notes">Notes:</label>
-            <form method="get" id="usrnotes">
-                <input type="submit">
-            </form>
-            <textarea form="usrnotes" rows="10" cols="50" name="notes" id="notes"></textarea>
+        <div class="form-group" id="feelingsForm">
+            <label for="feelings">How do you feel about it?</label><br>
+            <label class="image-checkbox" title="Content" id="content">
+                <img src="/static/img/content.png" class="img-rounded" alt="content" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="content" value="content"/>
+            </label>
+            <label class="image-checkbox" title="Happy" id="happy">
+                <img src="/static/img/happy.png" class="img-rounded" alt="happy" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="happy" value="happy"/>
+            </label>
+            <label class="image-checkbox" title="Excited" id="excited">
+                <img src="/static/img/excited.png" class="img-rounded" alt="excited" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="excited" value="excited"/>
+            </label>
+            <label class="image-checkbox" title="Neutral" id="neutral">
+                <img src="/static/img/neutral.png" class="img-rounded" alt="neutral" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="neutral" value="neutral"/>
+            </label>
+            <label class="image-checkbox" title="Angry" id="angry">
+                <img src="/static/img/angry.png" class="img-rounded" alt="angry" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="angry" value="angry"/>
+            </label>
+            <label class="image-checkbox" title="Frustrated" id="frustrated">
+                <img src="/static/img/frustrated.png" class="img-rounded" alt="frustrated" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="frustrated" value="frustrated"/>
+            </label>
+            <label class="image-checkbox" title="Sick" id="sick">
+                <img src="/static/img/sick.png" class="img-rounded" alt="sick" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="sick" value="sick"/>
+            </label>
+            <label class="image-checkbox" title="Sad" id="sad">
+                <img src="/static/img/sad.png" class="img-rounded" alt="sad" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="sad" value="sad"/>
+            </label>
+            <label class="image-checkbox" title="Disappointed" id="disappointed">
+                <img src="/static/img/disappointed.png" class="img-rounded" alt="disappointed" width="83" height="75p">
+                <input type="checkbox" class="feeling" name="disappointed" value="disappointed"/>
+            </label>
         </div>
     </div>
-</div>
-<div class="row">
-    <button class="button" id="go">Go</button>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea class="form-control" rows="11" id="notes"></textarea>
+        </div>
+        <button type="button" class="btn btn-default" id="submit" onClick="enterFeelings(document.myform.list)">Go</button>
+    </div>
 </div>
 {% endblock %}

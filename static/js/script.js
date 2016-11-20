@@ -33,6 +33,7 @@ function populateResults(data) {
 /*----------------get user input-------------------------*/
 var data = {}
 data["restrictions"] = [];
+data["feelings"] = [];
 
 $(document).on('click', '.dropdown-menu li a', function() {
     console.log($(this).text());
@@ -59,6 +60,29 @@ $('input:checkbox.restriction').each(function() {
     data["restrictions"].push((this.checked ? $(this).val() : ""));
 });
 
+var d = document
+var feelingsButton = d.getElementById('submit')
+var feelings = d.getElementById('feelingsForm')
+
+feelingsButton.onclick = function () {
+    var feelingsArray = feelingsToArray(feelings.children)
+    //console.log(feelings.children[0]);
+}
+
+function feelingsToArray (inputs) {
+    var array = [];
+    for (var i = 0; i < inputs.length; i++) {
+        var label = $(inputs[i].id);
+        console.log(label.attr('text'))
+        if (inputs[i].checked)
+            arraya.push(inputs[i].value);
+    }
+    return array;
+}
+
+$('label.myClass select').each(function(){
+    var inputVal = $(this).val();
+});
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
@@ -93,5 +117,11 @@ function login(username, password) {
 
         }
     });
+
+}
+
+function enterFeelings(feelings) {
+    console.log(feelings)
+    data["feelings"] = feelings;
 
 }

@@ -69,8 +69,9 @@ if __name__ == "__main__":
 	max_saturated_fat = document["saturated_fat"]
 	max_sodium = document["sodium"]
 	max_sugar = document["sugar"]
-	getMealPlan(restrictions,calories_min, 50, 5, "vegetable",max_total_fat,
-	max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
+	#getMealPlan(restrictions,calories_min, 50, 5, "vegetable",max_total_fat,
+	#
+	# max_cholesterol, max_saturated_fat,max_sodium, max_sugar)
 
 	port = int(os.environ.get("PORT", 5000))
 	app.run(host='0.0.0.0', port=port)
