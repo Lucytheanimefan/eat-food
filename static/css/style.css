@@ -13,84 +13,18 @@ body {
     top: 10% !important;
 }
 
-button.accordion {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    font-weight: bold;
-    transition: 0.4s;
+form {
+    text-align: center;
+}
+#login{
+    margin-left: 25% !important;
+    text-align: center;
+    width: 50%;
+    border-style: solid;
+    border-color: #f49ac1 !important;
+    margin-left: -50px;
+    margin-right: -50px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
-button.accordion.active,
-button.accordion:hover {
-    background-color: rgba(238, 238, 238, 0.4);
-    color: #444;
-}
-
-button.accordion:after {
-    content: '\02795';
-    font-size: 13px;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
-
-button.accordion.active:after {
-    content: "\2796";
-}
-
-div.panel {
-    padding: 0 18px;
-    background-color: rgba(255, 255, 255, 0.4);
-    max-height: 0;
-    overflow-y: hidden;
-    transition: 0.6s ease-in-out;
-    opacity: 0;
-}
-
-div.panel.show {
-    opacity: 1;
-    max-height: 500px;
-}
-
-.col-xs-15,
-.col-sm-15,
-.col-md-15,
-.col-lg-15 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
-.col-xs-15 {
-    width: 19%;
-    float: left;
-}
-
-@media (min-width: 768px) {
-    .col-sm-15 {
-        width: 19%;
-        float: left;
-    }
-}
-
-@media (min-width: 992px) {
-    .col-md-15 {
-        width: 19%;
-        float: left;
-    }
-}
-
-@media (min-width: 1200px) {
-    .col-lg-15 {
-        width: 19%;
-        float: left;
-    }
-}

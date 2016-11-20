@@ -62,6 +62,8 @@ $('input:checkbox.restriction').each(function() {
 
 /*-----------------user----------------------*/
 function createUser(username, password) {
+	console.log("Username: "+username);
+	console.log("password: "+password);
     $.ajax({
         type: 'POST',
         url: '/createaccount',
@@ -72,7 +74,6 @@ function createUser(username, password) {
             console.log('in ajax create user');
             console.log(response);
             alert(response);
-            window.location.replace("http://stackoverflow.com");
 
         }
     });
