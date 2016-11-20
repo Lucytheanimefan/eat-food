@@ -11,22 +11,11 @@
 </head>
 
 <body data-sidebar-color="sidebar-light" class="sidebar-light">
-    <!-- 
     <header>
-        <div class="search-bar closed">
-            <form>
-                <div class="input-group input-group-lg">
-                    <input type="text" placeholder="Search for..." class="form-control"><span class="input-group-btn">
-              <button type="button" class="btn btn-default search-bar-toggle"><i class="ti-close"></i></button></span>
-                </div>
-            </form>
-        </div>
-    </header>-->
-    <div class="main-container">
-        <h1>Food Recommender</h1>
-        <div class="container-fluid">
-            {% block body %}{% endblock %}
-        </div>
+
+    </header>
+    <div class="container-fluid">
+        {% block body %}{% endblock %}
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>

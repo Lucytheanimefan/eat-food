@@ -77,3 +77,21 @@ function createUser(username, password) {
         }
     });
 }
+
+function login(username, password) {
+    $.ajax({
+        type: 'POST',
+        url: '/login',
+        data: JSON.stringify({ "username": username, "password": password }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        processData: false,
+        success: function(response) {
+            console.log('in ajax login user');
+            console.log(response);
+            alert(response);
+
+        }
+    });
+
+}
