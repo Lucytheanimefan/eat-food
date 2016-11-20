@@ -5,6 +5,14 @@ nix = Nutritionix(app_id="7f770e5d", api_key="dae4065c600b6b161789a27471167ccd")
 
 
 def canAdd(item, oneMealPlan, max_total_fat, max_cholesterol, max_saturated_fat, max_sodium, max_sugar):
+  print "Saturated fat-----------"
+  print oneMealPlan['saturated_fat']
+  print item['saturated_fat']
+  print "----------------------"
+  if item['saturated_fat'] is None:
+    item['saturated_fat'] = 0
+  if item['sugar'] is None:
+    item['sugar'] = 0
   return ((oneMealPlan['total_fat'] + item['total_fat'] <= max_total_fat) and 
   (oneMealPlan['saturated_fat'] + item['saturated_fat'] <= max_saturated_fat) and
   (oneMealPlan['cholesterol'] + item['cholesterol'] <= max_cholesterol) and
@@ -95,6 +103,10 @@ def getMealPlan(restrictions, calories_min, limit_number, offset_value, food_typ
           print "the ingredient: " + j
          # print "y value is " + y
           print allFood[item][j]
+          if oneMealPlan[j] is None:
+            oneMealPlan[j]=0
+          if y is None:
+            y = 0
           oneMealPlan[j] = oneMealPlan[j]+ y
       allMealPlans.append(oneMealPlan)
     i = i + 1
