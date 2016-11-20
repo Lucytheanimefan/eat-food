@@ -58,7 +58,6 @@ function populateResults(data) {
 }
 
 
-
 function populateDropdown() {
     var data = localStorage.mealPlan;
     for (var i = 0; i < 8; i++) {
@@ -140,6 +139,9 @@ function login(username, password) {
     });
 
 }
+
+
+/*-----------------------journal---------------------*/
 
 var feelings_ids = ["happy", "content", "neutral", "excited", "angry", "frustrated", "sick", "sad", "disappointed"];
 
