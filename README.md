@@ -1,7 +1,7 @@
 # eat-food
 
 Created for HackDuke 2017. 
-On [devpost]https://devpost.com/software/eat-food
+https://devpost.com/software/eat-food
 
 ## What it does
 FOODpedia uses a database of food types to decide different food options in the form of meal plans for users to follow and eat. Users enter in their information (age, height, weight, activity level etc.) and FOODpedia generates eight meal plans that users can follow based on their physical statistics. Each food presented in a meal plan assumes one serving of each food, and no caloric counts are viewable by users. Instead, FOODpedia calculates the amount of calories in each meal plan behind the scenes to make sure that the total caloric count is within the range of a healthy amount of food the user should be eating based on the physical statistics. The meal plan will also be composed of food that covers the necessary amounts of each nutrient the user requires.
